@@ -37,7 +37,7 @@ NIX_CC='/nix/store/zznja5f8v3jafffyah1rk46vpfcn38dv-gcc-wrapper-13.3.0'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=whsppkgfin -isystem /nix/store/anjawprgi57hvfjr7jgl7qnr14dsk9py-raylib-5.0/include -isystem /nix/store/6wcvn7nvxarvcjfbqiia8q0gij9bylr8-glu-9.0.3-dev/include -isystem /nix/store/0nifpiwvav0p4nh67w5vzy3xfdy2m50g-libglvnd-1.7.0-dev/include -isystem /nix/store/9rcc4vw6140z5s306jmppnfcys5782mk-libX11-1.8.10-dev/include -isystem /nix/store/8vqwsvmx9idbiypfddgf1r94ns3yc7i7-xorgproto-2024.1/include -isystem /nix/store/s44fm8zq4fmnbcxkzy8hyh88yrkm0q2v-libxcb-1.17.0-dev/include -isystem /nix/store/h3i0acpmr8mrjx07519xxmidv8mpax4y-python3-3.12.5/include -isystem /nix/store/anjawprgi57hvfjr7jgl7qnr14dsk9py-raylib-5.0/include -isystem /nix/store/6wcvn7nvxarvcjfbqiia8q0gij9bylr8-glu-9.0.3-dev/include -isystem /nix/store/0nifpiwvav0p4nh67w5vzy3xfdy2m50g-libglvnd-1.7.0-dev/include -isystem /nix/store/9rcc4vw6140z5s306jmppnfcys5782mk-libX11-1.8.10-dev/include -isystem /nix/store/8vqwsvmx9idbiypfddgf1r94ns3yc7i7-xorgproto-2024.1/include -isystem /nix/store/s44fm8zq4fmnbcxkzy8hyh88yrkm0q2v-libxcb-1.17.0-dev/include -isystem /nix/store/h3i0acpmr8mrjx07519xxmidv8mpax4y-python3-3.12.5/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=n9hlv38cs5 -isystem /nix/store/anjawprgi57hvfjr7jgl7qnr14dsk9py-raylib-5.0/include -isystem /nix/store/6wcvn7nvxarvcjfbqiia8q0gij9bylr8-glu-9.0.3-dev/include -isystem /nix/store/0nifpiwvav0p4nh67w5vzy3xfdy2m50g-libglvnd-1.7.0-dev/include -isystem /nix/store/9rcc4vw6140z5s306jmppnfcys5782mk-libX11-1.8.10-dev/include -isystem /nix/store/8vqwsvmx9idbiypfddgf1r94ns3yc7i7-xorgproto-2024.1/include -isystem /nix/store/s44fm8zq4fmnbcxkzy8hyh88yrkm0q2v-libxcb-1.17.0-dev/include -isystem /nix/store/h3i0acpmr8mrjx07519xxmidv8mpax4y-python3-3.12.5/include -isystem /nix/store/anjawprgi57hvfjr7jgl7qnr14dsk9py-raylib-5.0/include -isystem /nix/store/6wcvn7nvxarvcjfbqiia8q0gij9bylr8-glu-9.0.3-dev/include -isystem /nix/store/0nifpiwvav0p4nh67w5vzy3xfdy2m50g-libglvnd-1.7.0-dev/include -isystem /nix/store/9rcc4vw6140z5s306jmppnfcys5782mk-libX11-1.8.10-dev/include -isystem /nix/store/8vqwsvmx9idbiypfddgf1r94ns3yc7i7-xorgproto-2024.1/include -isystem /nix/store/s44fm8zq4fmnbcxkzy8hyh88yrkm0q2v-libxcb-1.17.0-dev/include -isystem /nix/store/h3i0acpmr8mrjx07519xxmidv8mpax4y-python3-3.12.5/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
@@ -186,6 +186,8 @@ declare -a propagatedTargetDepFiles=('propagated-target-target-deps' )
 shell='/nix/store/izpf49b74i15pcr9708s3xdwyqs4jxwl-bash-5.2p32/bin/bash'
 export shell
 shellHook='echo '\''Entering a python shell template'\''
+echo '\''Python interpreter lives at /nix/store/h3i0acpmr8mrjx07519xxmidv8mpax4y-python3-3.12.5'\''
+echo '\''Pyraylib lives at /nix/store/mlpip2n66vv2l4s1rdqwh306xandq6zq-python3.12-pyraylib-1.0.2'\''
 '
 export shellHook
 stdenv='/nix/store/91d27rjqlhkzx7mhzxrir1jcr40nyc7p-stdenv-linux'

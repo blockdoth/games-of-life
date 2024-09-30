@@ -32,20 +32,21 @@
             python3Packages.setuptools 
             pkg-config
           ];
-          
+
           buildInputs = with pkgs; [ 
             python3Packages.cffi
             python3Packages.setuptools 
-            raylib
+            raylib 
           ];
           
           preBuild = ''
             export PKG_CONFIG_PATH=${pkgs.raylib}/lib/pkgconfig
           '';
-          
         };
+
       });
 
+      # Adjust the devShells section to use the now-exposed patchedRaylib
       devShells = forEachSupportedSystem (system: let
         pkgs = system.pkgs;
         pyraylib = self.packages.${pkgs.system}.pyraylib;
@@ -55,6 +56,8 @@
 
           shellHook = ''
             echo 'Entering a python shell template'
+            echo 'Python interpreter lives at ${pkgs.python3Packages.python}'
+            echo 'Pyraylib lives at ${pyraylib}'
           '';
 
           packages = with pkgs; [
@@ -64,7 +67,6 @@
             pyraylib
             cffi
           ]);
-
         };
       });
     };
