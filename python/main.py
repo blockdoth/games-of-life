@@ -1,32 +1,38 @@
 from pyray import *
 import math
+import sys
 
-with open("../config", "r") as config_file:
-  MAX_GENERATIONS = int(config_file.readline())
-  CELL_COUNT_V, CELL_COUNT_H = map(int, config_file.readline().split())
-  CELL_SIZE, MARGIN = map(int, config_file.readline().split())
-  PATTERN_ORIGIN_X, PATTERN_ORIGIN_Y = map(int, config_file.readline().split())
+input_data = sys.stdin.read().splitlines()
 
-  start_cells = [     
-    (x + PATTERN_ORIGIN_X, y + PATTERN_ORIGIN_Y) 
-    for x, line in enumerate(config_file.readlines()) 
-    for y, char in enumerate(line) 
+MAX_GENERATIONS = int(input_data[0])
+CELL_COUNT_V, CELL_COUNT_H = map(int, input_data[1].split())
+CELL_SIZE, MARGIN = map(int, input_data[2].split())
+PATTERN_ORIGIN_X, PATTERN_ORIGIN_Y = map(int, input_data[3].split())
+
+START_CELLS = [
+    (x, y)
+    for y, line in enumerate(input_data[4:])  
+    for x, char in enumerate(line)
     if char == "O"
-  ]
+]
+
 
 SCREEN_SIZE_V = CELL_COUNT_V * CELL_SIZE + 2 * MARGIN
 SCREEN_SIZE_H = CELL_COUNT_H * CELL_SIZE + 2 * MARGIN
 
 print(f'Loaded config: \n\
-        Cell count:\t{CELL_COUNT_V}x{CELL_COUNT_H} \n\
-        Cell size:\t{CELL_SIZE} \n\
-        Margin: \t{MARGIN} \n\
-        Starter cells:\t{start_cells} \n\
+        Max generations: {MAX_GENERATIONS}\n\
+        Screen size:\t {SCREEN_SIZE_H}x{SCREEN_SIZE_V}\n\
+        Cell count:\t {CELL_COUNT_V}x{CELL_COUNT_H} \n\
+        Cell size:\t {CELL_SIZE} \n\
+        Margin:\t\t {MARGIN} \n\
+        Pattern start:\t ({PATTERN_ORIGIN_X},{PATTERN_ORIGIN_Y})\n\
+        Starter origin:\t {START_CELLS} \n\
       ')
 
 grid = [[False for _ in range(CELL_COUNT_H)] for _ in range(CELL_COUNT_V)]
-for cell in start_cells:
-  grid[cell[1]][cell[0]] = True
+for cell in START_CELLS:
+  grid[cell[1] + PATTERN_ORIGIN_Y][cell[0] + PATTERN_ORIGIN_X] = True
 
 
 
@@ -40,15 +46,14 @@ def updateGrid():
       neighbours = 0
       for dy in range(-1,2):
         for dx in range(-1,2):
+          if (dx == 0 and dy == 0):
+            continue
           ypos = y + dy
           xpos = x + dx
-          if (0 <= ypos < CELL_COUNT_V) and (0 <= xpos < CELL_COUNT_H) and not (dx == 0 and dy == 0) and grid[ypos][xpos]:            
+          if (0 <= ypos < CELL_COUNT_V) and (0 <= xpos < CELL_COUNT_H) and grid[ypos][xpos]:            
             neighbours += 1
-      if grid[y][x] and (neighbours == 2 or neighbours == 3):
+      if (grid[y][x] and (neighbours == 2 or neighbours == 3)) or (not grid[y][x] and neighbours == 3):
         grid_next[y][x] = True
-        alive_count +=1
-      elif not grid[y][x] and neighbours == 3:
-        grid_next[y][x] = True 
         alive_count +=1
       else:
         grid_next[y][x] = False

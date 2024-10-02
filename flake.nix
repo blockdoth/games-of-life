@@ -43,26 +43,52 @@
             export PKG_CONFIG_PATH=${pkgs.raylib}/lib/pkgconfig
           '';
         };
+        javaraylib = pkgs.maven.buildMavenPackage {
+          pname = "javaraylib";
+          version = "0.0.3";
+          src = pkgs.fetchFromGitHub {
+            owner = "electronstudio";
+            repo = "jaylib-ffm";
+            rev = "c8218ae951fe5aa8cbd6b69ace2b7747b928648b";
+            sha256 = "sha256-5UXpOJCdUAQl/ZesmlvIMeSb6tkgvU93dantfZA5s+M=";
+          };
+          mvnHash = "";
+          pom = "${self.packages.${pkgs.system}.javaraylib.src}/pom.xml"; 
+
+          nativeBuildInputs = with pkgs; [
+            jdk22
+          ];
+
+          preBuild = ''
+              export JAVA_HOME=${pkgs.jdk22}/lib/openjdk/
+              java -version
+          '';
+
+
+        };
 
       });
 
-      # Adjust the devShells section to use the now-exposed patchedRaylib
       devShells = forEachSupportedSystem (system: let
         pkgs = system.pkgs;
         pyraylib = self.packages.${pkgs.system}.pyraylib;
+        # javaraylib = self.packages.${pkgs.system}.javaraylib;
       in {
         default = pkgs.mkShell {
           venvDir = "./.venv";
 
           shellHook = ''
-            echo 'Entering a python shell template'
             echo 'Python interpreter lives at ${pkgs.python3Packages.python}'
-            echo 'Pyraylib lives at ${pyraylib}'
+            echo 'JDK lives at ${pkgs.jdk22}'
+            echo 'pyraylib lives at ${pyraylib}'
           '';
 
           packages = with pkgs; [
             raylib
+            jdk22
+            # javaraylib
           ] ++ (with pkgs.python3Packages; [
+            pypy
             python
             pyraylib
             cffi
