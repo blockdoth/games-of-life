@@ -1,1 +1,5 @@
 .idea/
+.envrc
+.direnv
+raylib-rs
+rust/target

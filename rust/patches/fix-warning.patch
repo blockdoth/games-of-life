@@ -1,0 +1,13 @@
+diff --git a/raylib-sys/build.rs b/raylib-sys/build.rs
+index 0399146..9565846 100644
+--- a/raylib-sys/build.rs
++++ b/raylib-sys/build.rs
+@@ -62,7 +62,7 @@ fn build_with_cmake(src_path: &str) {
+ 
+     let mut conf = cmake::Config::new(src_path);
+     let mut builder;
+-    let mut profile = "";
++    let profile;
+     #[cfg(debug_assertions)]
+     {
+         builder = conf.profile("Debug");
